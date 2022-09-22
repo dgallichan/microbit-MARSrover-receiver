@@ -1,0 +1,26 @@
+{
+    "name": "microbit-MARSroverTest",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "MARS-Rover": "github:4tronix/MARS-Rover#91c6e903f0db9727919f4544a18012a42d70a4b0"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "5.0.12",
+        "targetId": "microbit"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj"
+}
