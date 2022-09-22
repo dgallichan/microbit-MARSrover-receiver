@@ -21,7 +21,7 @@ radio.onReceivedValueDeprecated(function (name, value) {
         100
         )
         leftDrive = MappedDrive
-        rightDrive = 180 - MappedDrive
+        rightDrive = 100 - MappedDrive
     }
     LeftOutput = (leftDrive + leftTurn) / 2
     RightOutput = (rightDrive + rightTurn) / 2
