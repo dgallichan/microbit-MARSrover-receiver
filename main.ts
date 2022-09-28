@@ -38,12 +38,13 @@ radio.onReceivedValueDeprecated(function (name, value) {
         if (RawGrabber == -9999) {
         	
         } else {
+            // -90 to 90 is possible on the mast, but it hits the cable!
             MappedGrabber = pins.map(
             RawGrabber,
             0,
             1000,
-            -90,
-            90
+            -45,
+            45
             )
             Rover.setServo(Rover.getServoNumber(eServos.Mast), MappedGrabber)
         }
