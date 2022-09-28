@@ -68,7 +68,7 @@ radio.onReceivedValueDeprecated(function (name, value) {
             if (mappedSpin > 0) {
                 Rover.spin(eDirection.Right, mappedSpin)
             } else {
-                Rover.spin(eDirection.Right, -1 * mappedSpin)
+                Rover.spin(eDirection.Left, -1 * mappedSpin)
             }
         }
     }
