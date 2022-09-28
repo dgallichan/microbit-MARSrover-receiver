@@ -52,7 +52,29 @@ radio.onReceivedValueDeprecated(function (name, value) {
             Rover.setServo(Rover.getServoNumber(eServos.Mast), MappedGrabber)
         }
     }
+    if (name == "Spin") {
+        rawSpin = value
+        if (rawSpin == -9999) {
+        	
+        } else {
+            mappedSpin = pins.map(
+            rawSpin,
+            -1000,
+            1000,
+            -100,
+            100
+            )
+            mappedSpin = Math.constrain(mappedSpin, -100, 100)
+            if (mappedSpin > 0) {
+                Rover.spin(eDirection.Right, mappedSpin)
+            } else {
+                Rover.spin(eDirection.Right, -1 * mappedSpin)
+            }
+        }
+    }
 })
+let mappedSpin = 0
+let rawSpin = 0
 let MappedGrabber = 0
 let RawGrabber = 0
 let MappedDrive = 0
@@ -67,6 +89,7 @@ basic.showLeds(`
     # . . . #
     # . . . #
     `)
+Rover.ledRainbow()
 basic.forever(function () {
 	
 })
