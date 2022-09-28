@@ -8,6 +8,7 @@ radio.onReceivedValueDeprecated(function (name, value) {
         -30,
         30
         )
+        MappedTurn = Math.constrain(MappedTurn, -30, 30)
     }
     if (name == "Drive") {
         RawDrive = value
@@ -18,6 +19,7 @@ radio.onReceivedValueDeprecated(function (name, value) {
         -100,
         100
         )
+        MappedDrive = Math.constrain(MappedDrive, -100, 100)
     }
     if (RawDrive == 0 && RawTurn == 0) {
         Rover.stop(eStopMode.Coast)
@@ -43,9 +45,10 @@ radio.onReceivedValueDeprecated(function (name, value) {
             RawGrabber,
             0,
             1000,
-            -45,
-            45
+            -30,
+            30
             )
+            MappedGrabber = Math.constrain(MappedGrabber, -30, 30)
             Rover.setServo(Rover.getServoNumber(eServos.Mast), MappedGrabber)
         }
     }
