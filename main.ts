@@ -3,60 +3,56 @@ radio.onReceivedValueDeprecated(function (name, value) {
         RawTurn = value
         MappedTurn = pins.map(
         RawTurn,
-        -90,
-        90,
-        -100,
-        100
+        -1000,
+        1000,
+        -30,
+        30
         )
-        leftTurn = MappedTurn
-        rightTurn = MappedTurn
     }
     if (name == "Drive") {
         RawDrive = value
         MappedDrive = pins.map(
         RawDrive,
-        90,
-        -90,
+        -1000,
+        1000,
         -100,
         100
         )
-        leftDrive = MappedDrive
-        rightDrive = 100 - MappedDrive
     }
-    LeftOutput = (leftDrive + leftTurn) / 2
-    RightOutput = (rightDrive + rightTurn) / 2
     if (RawDrive == 0 && RawTurn == 0) {
         Rover.stop(eStopMode.Coast)
     } else {
-        Rover.motor(eMotor.Left, eVector.Forward, LeftOutput)
-        Rover.motor(eMotor.Right, eVector.Forward, RightOutput)
+        if (MappedDrive > 0) {
+            Rover.motor(eMotor.Both, eVector.Forward, MappedDrive)
+        } else {
+            Rover.motor(eMotor.Both, eVector.Reverse, -1 * MappedDrive)
+        }
+        if (MappedTurn > 0) {
+            Rover.steer(eDirection.Right, MappedTurn)
+        } else {
+            Rover.steer(eDirection.Left, -1 * MappedTurn)
+        }
     }
     if (name == "Grabber") {
         RawGrabber = value
-        if (RawGrabber == -999) {
+        if (RawGrabber == -9999) {
         	
         } else {
             MappedGrabber = pins.map(
             RawGrabber,
+            0,
+            1000,
             -90,
-            90,
-            -100,
-            100
+            90
             )
-            Rover.spin(eDirection.Right, MappedGrabber)
+            Rover.setServo(Rover.getServoNumber(eServos.Mast), MappedGrabber)
         }
     }
 })
 let MappedGrabber = 0
 let RawGrabber = 0
-let RightOutput = 0
-let LeftOutput = 0
-let rightDrive = 0
-let leftDrive = 0
 let MappedDrive = 0
 let RawDrive = 0
-let rightTurn = 0
-let leftTurn = 0
 let MappedTurn = 0
 let RawTurn = 0
 radio.setGroup(1)
@@ -69,7 +65,4 @@ basic.showLeds(`
     `)
 basic.forever(function () {
 	
-})
-basic.forever(function () {
-    basic.pause(100)
 })
