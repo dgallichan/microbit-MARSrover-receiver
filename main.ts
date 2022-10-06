@@ -5,10 +5,11 @@ radio.onReceivedValueDeprecated(function (name, value) {
         RawTurn,
         -1000,
         1000,
-        -30,
-        30
+        -20,
+        20
         )
-        MappedTurn = Math.constrain(MappedTurn, -30, 30)
+        // MARS rover accepts -45 to 45 it seems, but driving at speed with high turn values seems to get arms flailing...
+        MappedTurn = Math.constrain(MappedTurn, -20, 20)
     }
     if (name == "Drive") {
         RawDrive = value
