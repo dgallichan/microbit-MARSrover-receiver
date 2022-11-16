@@ -74,6 +74,39 @@ radio.onReceivedValueDeprecated(function (name, value) {
         }
     }
 })
+input.onButtonPressed(Button.AB, function () {
+    basic.showNumber(groupNumber)
+    makingChoice = true
+    while (makingChoice) {
+        basic.pause(200)
+        if (input.logoIsPressed()) {
+            makingChoice = false
+            if (groupNumber <= -1) {
+                groupNumber = groupNumber + 256
+            }
+            if (groupNumber >= 256) {
+                groupNumber = groupNumber - 256
+            }
+            radio.setGroup(groupNumber)
+            basic.showIcon(IconNames.Yes)
+            basic.pause(200)
+            basic.showLeds(`
+                . # # # .
+                . . # . .
+                . . # . .
+                # . . . #
+                . # # # .
+                `)
+        } else if (input.buttonIsPressed(Button.A)) {
+            groupNumber = groupNumber - 1
+            basic.showNumber(groupNumber)
+        } else if (input.buttonIsPressed(Button.B)) {
+            groupNumber = groupNumber + 1
+            basic.showNumber(groupNumber)
+        }
+    }
+})
+let makingChoice = false
 let mappedSpin = 0
 let rawSpin = 0
 let MappedGrabber = 0
@@ -82,7 +115,9 @@ let MappedDrive = 0
 let RawDrive = 0
 let MappedTurn = 0
 let RawTurn = 0
-radio.setGroup(255)
+let groupNumber = 0
+groupNumber = 255
+radio.setGroup(groupNumber)
 basic.showLeds(`
     # . . . #
     # # . # #
