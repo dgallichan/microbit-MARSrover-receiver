@@ -3,8 +3,8 @@ radio.onReceivedValueDeprecated(function (name, value) {
         RawTurn = value
         MappedTurn = pins.map(
         RawTurn,
-        -1000,
-        1000,
+        -90,
+        90,
         -20,
         20
         )
@@ -15,8 +15,8 @@ radio.onReceivedValueDeprecated(function (name, value) {
         RawDrive = value
         MappedDrive = pins.map(
         RawDrive,
-        -1000,
-        1000,
+        -90,
+        90,
         -100,
         100
         )
@@ -38,14 +38,14 @@ radio.onReceivedValueDeprecated(function (name, value) {
     }
     if (name == "Grabber") {
         RawGrabber = value
-        if (RawGrabber == -9999) {
+        if (RawGrabber == -999) {
         	
         } else {
             // -90 to 90 is possible on the mast, but it hits the cable!
             MappedGrabber = pins.map(
             RawGrabber,
-            0,
-            1000,
+            -90,
+            90,
             -30,
             30
             )
@@ -55,13 +55,13 @@ radio.onReceivedValueDeprecated(function (name, value) {
     }
     if (name == "Spin") {
         rawSpin = value
-        if (rawSpin == -9999) {
+        if (rawSpin == -999) {
         	
         } else {
             mappedSpin = pins.map(
             rawSpin,
-            -1000,
-            1000,
+            -90,
+            90,
             -100,
             100
             )
@@ -82,7 +82,7 @@ let MappedDrive = 0
 let RawDrive = 0
 let MappedTurn = 0
 let RawTurn = 0
-radio.setGroup(1)
+radio.setGroup(255)
 basic.showLeds(`
     # . . . #
     # # . # #
